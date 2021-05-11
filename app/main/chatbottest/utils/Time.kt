@@ -3,7 +3,7 @@ package learn.codeacademy.chatbottest.utils
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
-//object class that returns time
+//object class that returns time and is lso called in the BotResponses.kt file
 object Time {
 
     fun timeStamp() : String {
