@@ -2,7 +2,7 @@ package learn.codeacademy.chatbottest.utils
 
 import android.util.Log
 
-//object class that helps bot solve maths equations
+//object class that helps bot solve basic maths equations
 object SolveMath {
 
     fun solveMath(equation: String) : Int{
