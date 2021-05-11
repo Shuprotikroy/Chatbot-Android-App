@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity(){
         rv_messages.adapter = adapter
         rv_messages.layoutManager = LinearLayoutManager(applicationContext)
     }
+    //function used for sending messages
     private fun sendMessage() {
         val message = et_message.text.toString()
         val timeStamp = Time.timeStamp()
@@ -90,13 +91,13 @@ class MainActivity : AppCompatActivity(){
                 rv_messages.scrollToPosition(adapter.itemCount-1)
                 when(response){
                     OPEN_GOOGLE -> {
-                        val site = Intent(Intent.ACTION_VIEW)                 //opens google
+                        val site = Intent(Intent.ACTION_VIEW)                 //opens google on open google
                         site.data = Uri.parse("https://www.google.com/")
                         startActivity(site)
                     }
                     OPEN_SEARCH -> {
                         val site = Intent(Intent.ACTION_VIEW)
-                        val searchTerm: String? = message.substringAfter("search")                        //opens browser
+                        val searchTerm: String? = message.substringAfter("search")                        //opens browser on search+search term
                         site.data = Uri.parse("https://www.google.com/search?&q=$searchTerm")
                         startActivity(site)
                     }
@@ -125,7 +126,7 @@ class MainActivity : AppCompatActivity(){
         }
     }
 
-    private fun customMessage(message: String) {             //handles bot message on chatbot start and is called in OnCreate(_
+    private fun customMessage(message: String) {             //handles bot message on chatbot start and is called in OnCreate()
         GlobalScope.launch {
             delay(1000)
             withContext(Dispatchers.Main){
@@ -136,9 +137,10 @@ class MainActivity : AppCompatActivity(){
             }
         }
     }
-    //function for parsing json data
+    //function for parsing json data and showing upcoming cricket matches
     private fun jsonParse(){
         val url = "https://cricapi.com/api/matchCalendar?apikey=x4xpfgwxkLcN0vhULFsSLpOmPft1"
+        //JsonObjectRequest is used to fetch data from the given url,parse it and display list of cricket matches
         val request: JsonObjectRequest = JsonObjectRequest(Request.Method.GET,url,null,
                 Response.Listener {
                     response -> try {
