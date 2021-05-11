@@ -11,12 +11,12 @@ import learn.codeacademy.chatbottest.utils.Constants.RECIEVE_ID
 import learn.codeacademy.chatbottest.utils.Constants.SEND_ID
 
 class MessagingAdapter: RecyclerView.Adapter<MessagingAdapter.MessageViewHolder>() {
-
+//messgeslist stores the Message dataclass in mutable list
     var messagesList = mutableListOf<Message>()
-//    var cricketList = mutableListOf<CricketScore>() //mutable list of all cricket data
 
     inner class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         init {
+            //enables on removing of messages when a message is long pressed
             itemView.setOnClickListener {
                 messagesList.removeAt(adapterPosition)
                 notifyItemRemoved(adapterPosition)
@@ -34,6 +34,7 @@ class MessagingAdapter: RecyclerView.Adapter<MessagingAdapter.MessageViewHolder>
        val currentMessage = messagesList[position]       //tracks and returns current position of a message
 
         when(currentMessage.id){
+            //when currentMessage id is SEND_ID,it shows the user types messages
             SEND_ID -> {
                 holder.itemView.tv_message.apply{
                     text = currentMessage.message
@@ -41,6 +42,7 @@ class MessagingAdapter: RecyclerView.Adapter<MessagingAdapter.MessageViewHolder>
                 }
                 holder.itemView.tv_bot_message.visibility = View.GONE
             }
+            //when currentMessge id is RECIEVE_ID,it shows the bot responses
             RECIEVE_ID -> {
                 holder.itemView.tv_bot_message.apply {
                     text = currentMessage.message
@@ -61,9 +63,6 @@ return messagesList.size
         this.messagesList.add(message)
         notifyItemInserted(messagesList.size)
     }
-//    fun  insertScore(updateCricket: CricketScore){ //function used to update score in mainactivity
-//        this.cricketList.add(updateCricket)
-//        notifyItemInserted(messagesList.size)
-//    }
+
 
 }
